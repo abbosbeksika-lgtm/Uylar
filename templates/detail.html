@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uy Tafsilotlari</title>
+<style>
+body{font-family:Arial,sans-serif;padding:40px;transition:all 0.3s;background:#f4f4f4;color:#121212;}
+h2{text-align:center;margin-bottom:20px;}
+.toggle-btn{display:block;margin:0 auto 20px;padding:10px 20px;border-radius:10px;font-weight:bold;cursor:pointer;border:none;background:linear-gradient(145deg,#e0e0e0,#fff);box-shadow:5px5px10px #ccc,-5px-5px10px #fff;transition:all 0.2s ease;}
+.toggle-btn:active{box-shadow:inset 5px 5px 10px #ccc,inset -5px -5px 10px #fff;}
+.toggle-btn:hover{opacity:0.9;}
+.details{width:60%;margin:auto;border-radius:15px;padding:30px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,0.05),0 0 40px rgba(0,0,0,0.03);transition:all 0.3s;}
+.details p{font-size:18px;margin:10px 0;padding:10px;border-radius:10px;background:rgba(255,255,255,0.08);box-shadow:0 4px 20px rgba(0,0,0,0.05);}
+button, a.back-btn{padding:12px 22px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;box-shadow:5px5px10px #ccc,-5px-5px10px #fff;transition:all 0.2s ease;text-decoration:none;}
+a.back-btn{display:inline-block;background:#6c757d;color:#fff;margin-top:10px;}
+a.back-btn:hover{background:#555;}
+a.back-btn:active{box-shadow:inset 5px 5px 10px #ccc,inset -5px -5px 10px #fff;}
+body.dark-mode{background:#121212;color:#e0e0e0;}
+body.dark-mode .details{background:#1e1e1e;box-shadow:0 0 20px rgba(255,255,255,0.05);}
+body.dark-mode .toggle-btn{background:linear-gradient(145deg,#333,#444);color:#fff;box-shadow:5px5px10px #111,-5px-5px10px #555;}
+body.dark-mode .back-btn{background:#888;color:#121212;}
+body.dark-mode .back-btn:hover{background:#555;}
+</style>
+</head>
+<body class="light-mode">
+
+<h2>Uy Tafsilotlari</h2>
+<button class="toggle-btn" id="toggleMode">Dark mode 🌙</button>
+
+<div class="details">
+    <p><strong>Nom:</strong> {{ house.title }}</p>
+    <p><strong>Narx:</strong> {{ house.price }}</p>
+    <p><strong>Yaratilgan sana:</strong> {{ house.built_at }}</p>
+    <p><strong>Xonalar soni:</strong> {{ house.rooms }}</p>
+    <p><strong>Maydon (m²):</strong> {{ house.area }}</p>
+    <p><strong>Tavsif:</strong> {{ house.desc }}</p>
+
+    <div style="margin-top:15px;">
+        <a href="{% url 'update' house.id %}" class="back-btn">Tahrirlash</a>
+        <a href="{% url 'delete' house.id %}" class="back-btn" onclick="return confirm('Haqiqatan ochirmoqchimisiz?');">O‘chirish</a>
+        <a href="{% url 'index' %}" class="back-btn">Orqaga</a>
+    </div>
+</div>
+
+<script>
+const toggleBtn=document.getElementById('toggleMode');const body=document.body;
+let savedMode=localStorage.getItem('mode');
+if(savedMode==='dark'){body.classList.add('dark-mode');toggleBtn.textContent='Light Mode ☀';}
+else{toggleBtn.textContent='Dark mode 🌙';}
+toggleBtn.addEventListener('click',()=>{
+if(body.classList.contains('dark-mode')){body.classList.remove('dark-mode');localStorage.setItem('mode','light');toggleBtn.textContent='Dark mode 🌙';}
+else{body.classList.add('dark-mode');localStorage.setItem('mode','dark');toggleBtn.textContent='Light Mode ☀';}
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uy Qo‘shish</title>
+<style>
+body { font-family: Arial,sans-serif; padding:40px; transition: all 0.3s; }
+
+/* Sarlavha */
+h2 { text-align:center; margin-bottom:20px; }
+
+/* Dark/Light toggle */
+.toggle-btn {
+    display:block; margin:0 auto 20px; padding:10px 20px; border-radius:10px;
+    font-weight:bold; cursor:pointer; border:none;
+    background: linear-gradient(145deg,#e0e0e0,#fff);
+    box-shadow:5px5px10px #ccc,-5px-5px10px #fff;
+    transition: all 0.2s ease;
+}
+.toggle-btn:active { box-shadow: inset 5px 5px 10px #ccc, inset -5px -5px 10px #fff; }
+.toggle-btn:hover{ opacity:0.9; }
+
+/* Form */
+form { width:60%; margin:auto; display:flex; flex-direction:column; gap:15px; }
+input, textarea { padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px; width:100%; }
+textarea { resize:vertical; }
+
+button.submit-btn {
+    padding:12px; border:none; border-radius:10px; font-weight:bold;
+    background-color:#28a745; color:#fff; cursor:pointer;
+    box-shadow:5px5px10px #ccc,-5px-5px10px #fff; transition:all 0.2s ease;
+}
+button.submit-btn:active { box-shadow: inset 5px 5px 10px #ccc, inset -5px -5px 10px #fff; }
+button.submit-btn:hover{ background-color:#218838; }
+
+/* Back button */
+.back-btn {
+    display:inline-block; background:#6c757d; color:#fff; text-decoration:none;
+    padding:12px 22px; border-radius:10px; box-shadow:5px5px10px #ccc,-5px-5px10px #fff;
+    transition:all 0.2s ease;
+}
+.back-btn:active { box-shadow: inset 5px 5px 10px #ccc, inset -5px -5px 10px #fff; }
+.back-btn:hover{ background:#555; }
+
+/* Dark Mode */
+body.dark-mode { background:#121212; color:#e0e0e0; }
+body.dark-mode input, body.dark-mode textarea { background:#1e1e1e; color:#e0e0e0; border:1px solid #555; }
+body.dark-mode button.submit-btn { background:#bb86fc; color:#121212; }
+body.dark-mode button.submit-btn:hover { background:#9b5de5; }
+body.dark-mode .toggle-btn { background: linear-gradient(145deg,#333,#444); color:#fff; box-shadow:5px5px10px #111,-5px-5px10px #555; }
+body.dark-mode .back-btn { background:#888; color:#121212; }
+body.dark-mode .back-btn:hover { background:#555; }
+</style>
+</head>
+<body class="light-mode">
+
+<h2>Uy Qo‘shish</h2>
+<button class="toggle-btn" id="toggleMode">Dark mode 🌙</button>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Uy nomi" required>
+    <input type="number" name="price" step="0.01" placeholder="Narxi" required>
+    <input type="date" name="built_at" placeholder="Yaratilgan sana" required>
+    <input type="number" name="rooms" placeholder="Xonalar soni" required>
+    <input type="number" step="0.01" name="area" placeholder="Maydon (m²)" required>
+    <textarea name="desc" placeholder="Tavsif" rows="4" required></textarea>
+
+    <div style="display:flex;gap:15px;margin-top:10px;flex-wrap:wrap;">
+        <button type="submit" class="submit-btn">Qo‘shish</button>
+        <a href="{% url 'index' %}" class="back-btn">Qaytish</a>
+    </div>
+</form>
+
+<script>
+const toggleBtn=document.getElementById('toggleMode');
+const body=document.body;
+let savedMode=localStorage.getItem('mode');
+if(savedMode==='dark'){body.classList.add('dark-mode');toggleBtn.textContent='Light Mode ☀';}
+else{toggleBtn.textContent='Dark mode 🌙';}
+toggleBtn.addEventListener('click',()=>{
+    if(body.classList.contains('dark-mode')){body.classList.remove('dark-mode');localStorage.setItem('mode','light');toggleBtn.textContent='Dark mode 🌙';}
+    else{body.classList.add('dark-mode');localStorage.setItem('mode','dark');toggleBtn.textContent='Light Mode ☀';}
+});
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uy Qo‘shish</title>
+<style>
+body { font-family: Arial,sans-serif; padding:40px; transition: all 0.3s; }
+
+/* Sarlavha */
+h2 { text-align:center; margin-bottom:20px; }
+
+/* Dark/Light toggle */
+.toggle-btn {
+    display:block; margin:0 auto 20px; padding:10px 20px; border-radius:10px;
+    font-weight:bold; cursor:pointer; border:none;
+    background: linear-gradient(145deg,#e0e0e0,#fff);
+    box-shadow:2px2px7px #ccc,-2px -2px 7px #fff;
+    transition: all 0.2s ease;
+}
+.toggle-btn:active { box-shadow: inset 2px -2px 7px #ccc, inset -2px -2px 7px #fff; }
+.toggle-btn:hover{ opacity:0.9; }
+
+/* Form */
+form { width:60%; margin:auto; display:flex; flex-direction:column; gap:15px; }
+input, textarea { padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px; width:100%; }
+textarea { resize:vertical; }
+
+button.submit-btn {
+    padding:12px; border:none; border-radius:10px; font-weight:bold;
+    background-color:#28a745; color:#fff; cursor:pointer;
+    box-shadow: 2px 2px 7px #ccc,-2px -2px 7px #fff; transition:all 0.2s ease;
+}
+button.submit-btn:active { box-shadow: inset 2px 3px 7px #ccc, inset -2px -2px 7px #fff; }
+button.submit-btn:hover{ background-color:#218838; }
+
+/* Back button */
+.back-btn {
+    display:inline-block; background:#6c757d; color:#fff; text-decoration:none;
+    padding:12px 22px; border-radius:10px; box-shadow:5px5px10px #ccc,-5px-5px10px #fff;
+    transition:all 0.2s ease;
+}
+.back-btn:active { box-shadow: inset 2px 3px 7px #ccc, inset -2px -2px 7px #fff; }
+.back-btn:hover{ background:#555; }
+
+/* Dark Mode */
+body.dark-mode { background:#121212; color:#e0e0e0; }
+body.dark-mode input, body.dark-mode textarea { background:#1e1e1e; color:#e0e0e0; border:1px solid #555; }
+body.dark-mode button.submit-btn { background:#bb86fc; color:#121212; }
+body.dark-mode button.submit-btn:hover { background:#9b5de5; }
+body.dark-mode .toggle-btn { background: linear-gradient(145deg,#333,#444); color:#fff; box-shadow:5px5px10px #111,-5px-5px10px #555; }
+body.dark-mode .back-btn { background:#888; color:#121212; }
+body.dark-mode .back-btn:hover { background:#555; }
+</style>
+</head>
