@@ -6,8 +6,8 @@ class House(models.Model):
     built_at = models.DateField()
     rooms = models.IntegerField()
     area = models.DecimalField(max_digits=6, decimal_places=2)
-    desc = models.TextField(blank=True)
-    image = models.ImageField(upload_to='house_images/', null=True, blank=True)
+    desc = models.TextField()
+    image = models.ImageField()
 
     def __str__(self):
         return self.title
