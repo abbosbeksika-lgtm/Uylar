@@ -5,7 +5,7 @@ class House(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     built_at = models.DateField()
     rooms = models.IntegerField()
-    area = models.DecimalField(max_digits=6, decimal_places=2)
+    area = models.DecimalField(max_digits=10, decimal_places=2)
     desc = models.TextField()
     image = models.ImageField()
 
